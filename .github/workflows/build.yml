@@ -21,9 +21,12 @@ jobs:
         
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
-    
+      
     - name: Execute Gradle build
       run: ./gradlew build
+      
+    - name: List build artifacts
+      run: ls -R ocpp-v1_6/build/libs ocpp-v2_0/build/libs || echo "Artifacts not found"
       
     - name: Upload JAR artifacts
       uses: actions/upload-artifact@v3
@@ -32,4 +35,4 @@ jobs:
         path: |
           ocpp-v1_6/build/libs/*.jar
           ocpp-v2_0/build/libs/*.jar
-      continue-on-error: true # Allows the workflow to continue even if an upload fails
+      continue-on-error: true
